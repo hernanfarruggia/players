@@ -1,0 +1,26 @@
+.list {
+    width: 100%;
+}
+
+table {
+    border: 1px solid gray;
+    border-spacing: 0;
+}
+
+thead {
+    background-color: black;
+    color: white;
+}
+
+th {
+    padding: 12px;
+}
+
+td {
+    border-right: 1px solid gray;
+    padding: 12px;
+}
+
+td:last-child {
+    border: none;
+}

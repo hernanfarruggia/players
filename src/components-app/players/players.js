@@ -1,9 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import {
+    getPlayers
+} from '../../redux/actions';
+
 import './players.css';
 
-const Players = props => {
+class Players extends React.Component {
 
-    const renderPlayers = player => {
+    componentDidMount () {
+        this.props.getPlayers();
+    }
+
+    renderPlayers = player => {
         return (
             <tr>
                 <td>{ player.name }</td>
@@ -14,21 +24,33 @@ const Players = props => {
         );
     }
 
-    return (
-        <table className="players">
-            <thead>
-                <tr>
-                    <th>Player</th>
-                    <th>Position</th>
-                    <th>Nationality</th>
-                    <th>Age</th>
-                </tr>
-            </thead>
-            <tbody>
-                { props.players.map(renderPlayers) }
-            </tbody>
-        </table>
-    );
+    render () {
+        return (
+            <table className="players">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Position</th>
+                        <th>Nationality</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    { this.props.filteredPlayers.map(this.renderPlayers) }
+                </tbody>
+            </table>
+        );
+    }
 }
 
-export default Players;
+const mapStateToProps = state => {
+    return state;
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getPlayers: () => dispatch(getPlayers())
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Players);

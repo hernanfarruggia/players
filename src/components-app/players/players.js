@@ -44,7 +44,9 @@ class Players extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return state;
+    return {
+        filteredPlayers: state.filteredPlayers
+    };
 }
 
 const mapDispatchToProps = dispatch => {

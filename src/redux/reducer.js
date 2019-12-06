@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
                 filteredPlayers: state.players.filter(player => {
                     return player.name.toLowerCase().includes(action.filters.name.toLowerCase()) &&
                         player.position.toLowerCase().includes(action.filters.position) &&
-                        player.dateOfBirth.includes(action.filters.age);
+                        player.age === action.filters.age;
                 }),
                 filters: action.filters
             });

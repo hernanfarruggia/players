@@ -7,7 +7,22 @@ export const getPlayers = () => {
         return fetch('https://football-players-b31f2.firebaseio.com/players.json?print=pretty')
             .then(res => res.json())
             .then(res => {
-                dispatch(getPlayersSuccess(res))
+                const players = res.map(player => {
+                    const { name, position, nationality, dateOfBirth } = player,
+                        birthdate = new Date(dateOfBirth + ' 00:00'), // Adding hh:mm resolves an issue with time and timezones
+                        ageDiff = Date.now() - birthdate.getTime(),
+                        ageDate = new Date(ageDiff),
+                        age = Math.abs(ageDate.getUTCFullYear() - 1970);
+
+                    return {
+                        name,
+                        position,
+                        nationality,
+                        age
+                    };
+                });
+
+                dispatch(getPlayersSuccess(players));
             })
             .catch(error => dispatch(getPlayersFailure(error)));
     };

@@ -6,7 +6,7 @@ import {
 } from '../../redux/actions';
 
 import Filters from '../filters';
-import List from '../list';
+import Players from '../players';
 
 import './app.css';
 
@@ -27,7 +27,7 @@ class App extends React.Component {
                 <div className="content">
                     <Filters />
 
-                    <List players={ this.props.filteredPlayers }/>
+                    <Players players={ this.props.filteredPlayers }/>
                 </div>
 
             </div>

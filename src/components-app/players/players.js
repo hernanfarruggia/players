@@ -1,7 +1,7 @@
 import React from 'react';
-import './list.css';
+import './players.css';
 
-const List = props => {
+const Players = props => {
 
     const renderPlayers = player => {
         return (
@@ -15,7 +15,7 @@ const List = props => {
     }
 
     return (
-        <table className="list">
+        <table className="players">
             <thead>
                 <tr>
                     <th>Player</th>
@@ -31,4 +31,4 @@ const List = props => {
     );
 }
 
-export default List;
+export default Players;

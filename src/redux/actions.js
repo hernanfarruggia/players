@@ -1,31 +1,35 @@
-export const GET_PLAYERS = 'GET_PLAYERS';
 export const GET_PLAYERS_SUCCESS = 'GET_PLAYERS_SUCCESS';
 export const GET_PLAYERS_FAILURE = 'GET_PLAYERS_FAILURE';
 export const FILTER = 'FILTER';
 
-export function getPlayers () {
-    return {
-        type: GET_PLAYERS
+export const getPlayers = () => {
+    return dispatch => {
+        return fetch('https://football-players-b31f2.firebaseio.com/players.json?print=pretty')
+            .then(res => res.json())
+            .then(res => {
+                dispatch(getPlayersSuccess(res))
+            })
+            .catch(error => dispatch(getPlayersFailure(error)));
     };
 }
 
-function getPlayersSuccess (players) {
+const getPlayersSuccess = players => {
     return {
         type: GET_PLAYERS_SUCCESS,
         players
     };
 }
 
-function getPlayersFailure (error) {
+const getPlayersFailure = error => {
     return {
         type: GET_PLAYERS_FAILURE,
         error
     };
 }
 
-function filter (filter) {
+export const filter = filters => {
     return {
         type: FILTER,
-        filter
+        filters
     };
 }

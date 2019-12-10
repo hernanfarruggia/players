@@ -1,16 +1,13 @@
-import React from 'react';
-import { connect } from 'react-redux';
-
-import { filter } from '../../redux/actions';
+import React, { Component } from 'react';
 
 import './filters.css';
 
-class Filters extends React.Component {
+class Filters extends Component {
 
     constructor (props) {
         super(props);
 
-        this.state = props.filters;
+        this.state = this.props.filters;
     }
 
     handleChange = e => {
@@ -20,10 +17,10 @@ class Filters extends React.Component {
     }
 
     handleFilter = () => {
-        this.props.applyFilter(this.state);
+        this.props.handleFilter(this.state);
     }
 
-    render () {
+    render() {
         return (
             <div className="filters">
                 <input
@@ -31,35 +28,24 @@ class Filters extends React.Component {
                     name="name" 
                     onChange={ this.handleChange }
                     value={ this.state.name } />
-
+    
                 <select
                     name="position"
                     onChange={ this.handleChange }>
-                    <option selected>Position</option>
+                    <option value="">Position</option>
+                    { this.props.positions.map((position, key) => (<option value={ position.toLowerCase() } key={ key }>{ position }</option>)) }
                 </select>
-
+    
                 <input
                     type="number"
                     name="age"
                     onChange={ this.handleChange }
                     value={ this.state.age } />
                 
-                <button onClick={this.handleFilter}>Search</button>
+                <button onClick={ this.handleFilter }>Search</button>
             </div>
         );
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        filters: state.filters
-    };
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        applyFilter: (filters) => dispatch(filter(filters))
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filters);
+export default Filters;

@@ -20,7 +20,7 @@ class Filters extends React.Component {
     }
 
     handleFilter = () => {
-        this.props.filter(this.state);
+        this.props.applyFilter(this.state);
     }
 
     render () {
@@ -58,7 +58,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        filter: (filters) => dispatch(filter(filters))
+        applyFilter: (filters) => dispatch(filter(filters))
     };
 };
 

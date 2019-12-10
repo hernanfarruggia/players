@@ -9,7 +9,8 @@ export const getPlayers = () => {
             .then(res => {
                 const players = res.map(player => {
                     const { name, position, nationality, dateOfBirth } = player,
-                        birthdate = new Date(dateOfBirth + ' 00:00'), // Adding hh:mm resolves an issue with time and timezones
+                        // Adding hh:mm resolves an issue with time and timezones
+                        birthdate = new Date(dateOfBirth + ' 00:00'),
                         ageDiff = Date.now() - birthdate.getTime(),
                         ageDate = new Date(ageDiff),
                         age = Math.abs(ageDate.getUTCFullYear() - 1970);

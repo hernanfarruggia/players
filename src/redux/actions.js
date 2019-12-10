@@ -1,9 +1,27 @@
+export const CLEAR = 'CLEAR';
 export const GET_PLAYERS_SUCCESS = 'GET_PLAYERS_SUCCESS';
 export const GET_PLAYERS_FAILURE = 'GET_PLAYERS_FAILURE';
 export const FILTER = 'FILTER';
+export const LOADING_START = 'LOADING_START';
+export const LOADING_STOP = 'LOADING_STOP';
+
+export const loadingStart = () => {
+    return {
+        type: LOADING_START
+    };
+}
+
+export const loadingStop = () => {
+    return {
+        type: LOADING_STOP
+    };
+}
 
 export const getPlayers = () => {
     return dispatch => {
+
+        dispatch(loadingStart());
+
         return fetch('https://football-players-b31f2.firebaseio.com/players.json?print=pretty')
             .then(res => res.json())
             .then(res => {
@@ -23,9 +41,15 @@ export const getPlayers = () => {
                     };
                 });
 
+                dispatch(loadingStop());
+                
                 dispatch(getPlayersSuccess(players));
             })
-            .catch(error => dispatch(getPlayersFailure(error)));
+            .catch(error => {
+                dispatch(loadingStop());
+
+                dispatch(getPlayersFailure(error));
+            });
     };
 }
 
@@ -40,6 +64,12 @@ const getPlayersFailure = error => {
     return {
         type: GET_PLAYERS_FAILURE,
         error
+    };
+}
+
+export const clear = () => {
+    return {
+        type: CLEAR
     };
 }
 

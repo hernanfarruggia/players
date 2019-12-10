@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import {
+    clear,
     filter,
     getPlayers
 } from '../../redux/actions';
@@ -13,24 +14,16 @@ import './app.css';
 
 class App extends Component {
 
-    constructor (props) {
-        super(props);
-
-        this.state = {
-            filters: {
-                name: this.props.filters.name,
-                position: this.props.filters.position,
-                age: this.props.filters.age
-            }
-        };
-    }
-
     componentDidMount () {
         this.props.getPlayers();
     }
 
     handleFilter = (filters) => {
-        this.props.applyFilter(filters);
+        this.props.applyFilters(filters);
+    }
+
+    handleClear = () => {
+        this.props.clearFilters();
     }
 
     render () {
@@ -44,11 +37,13 @@ class App extends Component {
     
                 <div className="content">
                     <Filters
-                        filters={ this.state.filters }
+                        filters={ this.props.filters }
+                        handleClear={ this.handleClear }
                         handleFilter={ this.handleFilter }
                         positions={ this.props.positions } />
     
-                    <Players 
+                    <Players
+                        isLoading={ this.props.loading }
                         filteredPlayers={ this.props.filteredPlayers } />
                 </div>
     
@@ -64,7 +59,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        applyFilter: (filters) => dispatch(filter(filters)),
+        applyFilters: (filters) => dispatch(filter(filters)),
+        clearFilters: (filters) => dispatch(clear()),
         getPlayers: () => dispatch(getPlayers())
     };
 }

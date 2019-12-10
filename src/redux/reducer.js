@@ -1,4 +1,10 @@
-import { GET_PLAYERS_SUCCESS, FILTER } from "./actions";
+import {
+    CLEAR,
+    FILTER,
+    GET_PLAYERS_SUCCESS,
+    LOADING_START,
+    LOADING_STOP
+} from "./actions";
 
 const initialState = {
     players: [],
@@ -8,12 +14,25 @@ const initialState = {
         position: '',
         age: ''
     },
+    loading: true,
     positions: []
 };
 
 const reducer = (state = initialState, action) => {
 
     switch (action.type) {
+
+        case LOADING_START:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case LOADING_STOP:
+            return {
+                ...state,
+                loading: false
+            };
 
         case GET_PLAYERS_SUCCESS:
             // Getting positions and removing duplicates
@@ -25,6 +44,17 @@ const reducer = (state = initialState, action) => {
                 players: action.players,
                 filteredPlayers: action.players,
                 positions
+            };
+
+        case CLEAR:
+            return {
+                ...state,
+                filteredPlayers: state.players,
+                filters: {
+                    name: '',
+                    position: '',
+                    age: ''
+                }
             };
 
         case FILTER:

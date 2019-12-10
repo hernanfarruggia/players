@@ -10,6 +10,10 @@ class Filters extends Component {
         this.state = this.props.filters;
     }
 
+    shouldComponentUpdate (prevProps, prevState) {
+        return true;
+    }
+
     handleChange = e => {
         this.setState({
             [e.target.name]: e.target.value
@@ -18,6 +22,10 @@ class Filters extends Component {
 
     handleFilter = () => {
         this.props.handleFilter(this.state);
+    }
+
+    handleClear = () => {
+        this.props.handleClear();
     }
 
     render() {
@@ -43,6 +51,7 @@ class Filters extends Component {
                     value={ this.state.age } />
                 
                 <button onClick={ this.handleFilter }>Search</button>
+                <button onClick={ this.handleClear }>Clear</button>
             </div>
         );
     }

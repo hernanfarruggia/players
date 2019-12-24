@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
     clear,
     filter
-} from '../../redux/actions';
+} from '../redux/actions';
 
 import './filters.css';
 

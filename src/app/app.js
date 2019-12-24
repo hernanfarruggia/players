@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getPlayers } from '../../redux/actions';
+import { getPlayers } from '../redux/actions';
 
 import Filters from '../filters';
 import Players from '../players';

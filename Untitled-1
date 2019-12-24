@@ -1,0 +1,5 @@
+DEFECTS
+- After selecting a position, when clicking search, the position gets deleted.
+
+TODO
+- Display empty message if no results

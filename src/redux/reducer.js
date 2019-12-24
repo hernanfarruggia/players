@@ -69,7 +69,7 @@ const reducer = (state = initialState, action) => {
 
         case FILTER:
             // Avoid false positives by matching empty strings
-            action.filters.name = ! action.filters.name ? null : action.filters.name.toLowerCase();
+            action.filters.name = !action.filters.name ? null : action.filters.name.toLowerCase();
 
             return {
                 ...state,

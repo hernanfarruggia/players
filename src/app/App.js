@@ -14,6 +14,30 @@ class App extends Component {
         this.props.getPlayers();
     }
 
+    renderError(error) {
+        console.log(error);
+
+        return 'There\'s a connection issue, try reloading the page.';
+    }
+
+    renderPlayers() {
+        return (
+            <div>
+                <Filters />
+    
+                <Players
+                    isLoading={ this.props.loading }
+                    filteredPlayers={ this.props.filteredPlayers } />
+            </div>
+        );
+    }
+
+    renderContent() {
+        return this.props.error ?
+            this.renderError(this.props.error) :
+            this.renderPlayers();
+    }
+
     render () {
 
         return (
@@ -24,11 +48,7 @@ class App extends Component {
                 </header>
     
                 <div className="content">
-                    <Filters />
-    
-                    <Players
-                        isLoading={ this.props.loading }
-                        filteredPlayers={ this.props.filteredPlayers } />
+                    { this.renderContent() }
                 </div>
 
             </div>
@@ -39,6 +59,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
     return {
+        error: state.error,
+        loading: state.loading,
         filteredPlayers: state.filteredPlayers
     };
 }

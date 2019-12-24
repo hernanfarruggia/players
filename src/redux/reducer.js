@@ -3,11 +3,12 @@ import {
     FILTER,
     GET_PLAYERS_SUCCESS,
     LOADING_START,
-    LOADING_STOP
+    LOADING_STOP,
+    GET_PLAYERS_FAILURE
 } from "./actions";
 
 const initialState = {
-    players: [],
+    error: false,
     filteredPlayers: [],
     filters: {
         name: '',
@@ -15,6 +16,7 @@ const initialState = {
         age: ''
     },
     loading: true,
+    players: [],
     positions: []
 };
 
@@ -41,14 +43,22 @@ const reducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                players: action.players,
+                error: false,
                 filteredPlayers: action.players,
+                players: action.players,
                 positions
+            };
+
+        case GET_PLAYERS_FAILURE:
+            return {
+                ...state,
+                error: action.error
             };
 
         case CLEAR:
             return {
                 ...state,
+                error: false,
                 filteredPlayers: state.players,
                 filters: {
                     name: '',
@@ -63,6 +73,7 @@ const reducer = (state = initialState, action) => {
 
             return {
                 ...state,
+                error: false,
                 filteredPlayers: state.players.filter(player => {
 
                     return player.name.toLowerCase().includes(action.filters.name) ||

@@ -46,7 +46,9 @@ export const getPlayers = () => {
             .catch(error => {
                 dispatch(getPlayersFailure(error));
             })
-            .finally(dispatch(loadingStop()));
+            .finally(() => {
+                dispatch(loadingStop())
+            });
     };
 }
 

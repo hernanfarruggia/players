@@ -40,16 +40,13 @@ export const getPlayers = () => {
                         age
                     };
                 });
-
-                dispatch(loadingStop());
                 
                 dispatch(getPlayersSuccess(players));
             })
             .catch(error => {
-                dispatch(loadingStop());
-
                 dispatch(getPlayersFailure(error));
-            });
+            })
+            .finally(dispatch(loadingStop()));
     };
 }
 

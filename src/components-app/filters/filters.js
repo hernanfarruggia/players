@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import {
+    clear,
+    filter
+} from '../../redux/actions';
 
 import './filters.css';
 
@@ -7,11 +13,7 @@ class Filters extends Component {
     constructor (props) {
         super(props);
 
-        this.state = this.props.filters;
-    }
-
-    shouldComponentUpdate (prevProps, prevState) {
-        return true;
+        this.state = this.props;
     }
 
     handleChange = e => {
@@ -21,11 +23,17 @@ class Filters extends Component {
     }
 
     handleFilter = () => {
-        this.props.handleFilter(this.state);
+        this.props.applyFilters(this.state);
     }
 
     handleClear = () => {
-        this.props.handleClear();
+        this.props.clearFilters();
+
+        this.setState({
+            name: '',
+            position: '',
+            age: ''
+        });
     }
 
     render() {
@@ -57,4 +65,15 @@ class Filters extends Component {
     }
 }
 
-export default Filters;
+const mapStateToProps = state => {
+    return state.filters;
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        applyFilters: (filters) => dispatch(filter(filters)),
+        clearFilters: (filters) => dispatch(clear())
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filters);

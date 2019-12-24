@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {
-    clear,
-    filter,
-    getPlayers
-} from '../../redux/actions';
+import { getPlayers } from '../../redux/actions';
 
 import Filters from '../filters';
 import Players from '../players';
@@ -18,14 +14,6 @@ class App extends Component {
         this.props.getPlayers();
     }
 
-    handleFilter = (filters) => {
-        this.props.applyFilters(filters);
-    }
-
-    handleClear = () => {
-        this.props.clearFilters();
-    }
-
     render () {
 
         return (
@@ -36,17 +24,13 @@ class App extends Component {
                 </header>
     
                 <div className="content">
-                    <Filters
-                        filters={ this.props.filters }
-                        handleClear={ this.handleClear }
-                        handleFilter={ this.handleFilter }
-                        positions={ this.props.positions } />
+                    <Filters positions={ this.props.positions } />
     
                     <Players
                         isLoading={ this.props.loading }
                         filteredPlayers={ this.props.filteredPlayers } />
                 </div>
-    
+
             </div>
         );
     }
@@ -54,13 +38,14 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-    return state;
+    return {
+        filteredPlayers: state.filteredPlayers,
+        positions: state.positions
+    };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        applyFilters: (filters) => dispatch(filter(filters)),
-        clearFilters: (filters) => dispatch(clear()),
         getPlayers: () => dispatch(getPlayers())
     };
 }

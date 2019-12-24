@@ -1,3 +1,3 @@
-import Players from './players';
+import Players from './Players';
 
 export default Players;

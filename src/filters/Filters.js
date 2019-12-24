@@ -36,7 +36,7 @@ class Filters extends Component {
         });
     }
 
-    render() {
+    render () {
         return (
             <div className="filters">
                 <input
@@ -49,7 +49,7 @@ class Filters extends Component {
                     name="position"
                     onChange={ this.handleChange }>
                     <option value="">Position</option>
-                    { this.props.positions.map((position, key) => (<option value={ position.toLowerCase() } key={ key }>{ position }</option>)) }
+                    { this.renderPositions() }
                 </select>
     
                 <input
@@ -63,10 +63,24 @@ class Filters extends Component {
             </div>
         );
     }
+
+    renderPositions () {
+        return this.props.positions.map((position, key) => (
+            <option 
+                key={ key }
+                selected={ position.toLowerCase() === this.state.position }
+                value={ position.toLowerCase() }>
+                { position }
+            </option>
+        ));
+    }
 }
 
 const mapStateToProps = state => {
-    return state.filters;
+    return {
+        filters: state.filters,
+        positions: state.positions
+    };
 }
 
 const mapDispatchToProps = dispatch => {

@@ -7,9 +7,7 @@ import './players.css';
 const Players = (props) => {
 
     const renderLoading = () => {
-        return (
-            <Loading /> 
-        );
+        return <Loading />;
     }
 
     const renderPlayersTable = ()  => {
@@ -41,12 +39,31 @@ const Players = (props) => {
         );
     }
 
-    return (
-        <div>
-            { props.isLoading ? renderLoading() : renderPlayersTable() }
-        </div>
-        
-    );
+    const renderNotFound = () => {
+        return (
+            <div>
+                No players found.
+            </div>
+        );
+    }
+
+    const renderComponent = () => {
+        let render;
+
+        if (props.isLoading) {
+            render = renderLoading();
+        } else {
+            if (props.filteredPlayers.length > 0) {
+                render = renderPlayersTable();
+            } else {
+                render = renderNotFound();
+            }
+        }
+
+        return render;
+    }
+
+    return renderComponent();
 }
 
 export default Players;

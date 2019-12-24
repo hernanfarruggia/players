@@ -60,8 +60,6 @@ const reducer = (state = initialState, action) => {
         case FILTER:
             // Avoid false positives by matching empty strings
             action.filters.name = ! action.filters.name ? null : action.filters.name.toLowerCase();
-            // Avoid comparing string age values
-            action.filters.age = parseInt(action.filters.age);
 
             return {
                 ...state,
@@ -69,7 +67,7 @@ const reducer = (state = initialState, action) => {
 
                     return player.name.toLowerCase().includes(action.filters.name) ||
                         player.position.toLowerCase() === action.filters.position ||
-                        player.age === action.filters.age;
+                        toString(player.age) === action.filters.age;
                 }),
                 filters: action.filters
             };

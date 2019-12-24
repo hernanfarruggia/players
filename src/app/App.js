@@ -24,7 +24,7 @@ class App extends Component {
                 </header>
     
                 <div className="content">
-                    <Filters positions={ this.props.positions } />
+                    <Filters />
     
                     <Players
                         isLoading={ this.props.loading }
@@ -39,8 +39,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
     return {
-        filteredPlayers: state.filteredPlayers,
-        positions: state.positions
+        filteredPlayers: state.filteredPlayers
     };
 }
 

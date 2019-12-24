@@ -1,10 +1,10 @@
 import {
     CLEAR,
     FILTER,
+    GET_PLAYERS_FAILURE,
     GET_PLAYERS_SUCCESS,
     LOADING_START,
-    LOADING_STOP,
-    GET_PLAYERS_FAILURE
+    LOADING_STOP
 } from "./actions";
 
 const initialState = {

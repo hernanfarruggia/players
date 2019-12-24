@@ -40,9 +40,9 @@ class Filters extends Component {
         return (
             <div className="filters">
                 <input
-                    type="text"
                     name="name" 
                     onChange={ this.handleChange }
+                    type="text"
                     value={ this.state.name } />
     
                 <select
@@ -53,9 +53,10 @@ class Filters extends Component {
                 </select>
     
                 <input
-                    type="number"
+                    min="0"
                     name="age"
                     onChange={ this.handleChange }
+                    type="number"
                     value={ this.state.age } />
                 
                 <button onClick={ this.handleFilter }>Search</button>

@@ -41,7 +41,7 @@ const Players = (props) => {
 
     const renderNotFound = () => {
         return (
-            <div>
+            <div className="not_found">
                 No players found.
             </div>
         );

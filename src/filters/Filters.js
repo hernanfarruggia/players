@@ -8,12 +8,16 @@ import {
 
 import './filters.css';
 
-class Filters extends Component {
+export class Filters extends Component {
 
     constructor (props) {
         super(props);
 
-        this.state = this.props;
+        this.state = {
+            name: '',
+            position: '',
+            age: ''
+        }
     }
 
     handleChange = e => {
@@ -34,6 +38,17 @@ class Filters extends Component {
             position: '',
             age: ''
         });
+    }
+
+    renderPositions () {
+        return this.props.positions.map((position, key) => (
+            <option 
+                key={ key }
+                selected={ position.toLowerCase() === this.state.position }
+                value={ position.toLowerCase() }>
+                { position }
+            </option>
+        ));
     }
 
     render () {
@@ -59,29 +74,15 @@ class Filters extends Component {
                     type="number"
                     value={ this.state.age } />
                 
-                <button onClick={ this.handleFilter }>Search</button>
-                <button onClick={ this.handleClear }>Clear</button>
+                <button name="filterAction" onClick={ this.handleFilter }>Search</button>
+                <button name="clearAction" onClick={ this.handleClear }>Clear</button>
             </div>
         );
-    }
-
-    renderPositions () {
-        return this.props.positions.map((position, key) => (
-            <option 
-                key={ key }
-                selected={ position.toLowerCase() === this.state.position }
-                value={ position.toLowerCase() }>
-                { position }
-            </option>
-        ));
     }
 }
 
 const mapStateToProps = state => {
-    return {
-        filters: state.filters,
-        positions: state.positions
-    };
+    return state.filters;
 }
 
 const mapDispatchToProps = dispatch => {

@@ -15,9 +15,6 @@ export class App extends Component {
     }
 
     renderError(error) {
-        // Logging error for information purposes
-        console.log(error);
-
         return (
             <div className="error">
                 There's a connection issue, try reloading the page.

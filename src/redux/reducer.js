@@ -7,7 +7,7 @@ import {
     LOADING_STOP
 } from "./actions";
 
-const initialState = {
+export const initialState = {
     error: false,
     filteredPlayers: [],
     filters: {

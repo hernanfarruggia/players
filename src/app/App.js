@@ -8,16 +8,21 @@ import Players from '../players';
 
 import './app.css';
 
-class App extends Component {
+export class App extends Component {
 
     componentDidMount () {
         this.props.getPlayers();
     }
 
     renderError(error) {
+        // Logging error for information purposes
         console.log(error);
 
-        return 'There\'s a connection issue, try reloading the page.';
+        return (
+            <div className="error">
+                There's a connection issue, try reloading the page.
+            </div>
+        );
     }
 
     renderPlayers() {
@@ -41,7 +46,7 @@ class App extends Component {
     render () {
 
         return (
-            <div className="wrapper">
+            <div className="app">
     
                 <header className="header">
                     Football Players Finder

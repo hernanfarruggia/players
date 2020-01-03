@@ -18,7 +18,6 @@ describe('Filters Component', () => {
         };
 
         wrapper = shallow(<Filters {...props} />);
-
         instance = wrapper.instance();
     })
 

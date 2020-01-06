@@ -82,7 +82,10 @@ export class Filters extends Component {
 }
 
 const mapStateToProps = state => {
-    return state.filters;
+    return {
+        filters: state.filters,
+        positions: state.positions
+    };
 }
 
 const mapDispatchToProps = dispatch => {

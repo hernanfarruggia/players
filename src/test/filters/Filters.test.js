@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Filters } from './Filters';
+import { Filters } from '../../filters/Filters';
 
 describe('Filters Component', () => {
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Players from './Players';
-import Loading from '../loading'
+import Players from '../../players';
+import Loading from '../../loading'
 
 describe('Players Component', () => {
 

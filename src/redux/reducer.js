@@ -78,7 +78,7 @@ const reducer = (state = initialState, action) => {
 
                     return player.name.toLowerCase().includes(action.filters.name) ||
                         player.position.toLowerCase() === action.filters.position ||
-                        toString(player.age) === action.filters.age;
+                        player.age.toString() === action.filters.age;
                 }),
                 filters: action.filters
             };
